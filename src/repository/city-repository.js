@@ -3,9 +3,12 @@ const { City } = require('../models/index');
  class CityRepository {
     async createCity( {name}){
         try {
-            const city = await City.create({name});
+            const city = await City.create({
+                name
+            });
             return city;
         } catch (error) {
+            console.log("Something went wrong in the repository layer");
             throw {error};
         }
     }
@@ -20,6 +23,28 @@ const { City } = require('../models/index');
         } catch (error) {
             throw {error};
         }
+    }
+
+    async updateCiy({ cityId , data}){
+        const city = City.update(data, {
+            where: {
+                id:cityId
+            }
+        })
+        
+
+    }
+
+    async getCity(cityId){
+        try{
+            const city = await City.findByPk(cityId);
+            return city;
+        }
+        catch{
+            console.log("Something went wrong in the repository layer");
+            throw {error};
+        }
+
     }
  }
 
