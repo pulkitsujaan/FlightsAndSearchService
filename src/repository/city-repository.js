@@ -20,18 +20,24 @@ const { City } = require('../models/index');
                     id: cityId,
                 }
             })
+            return true;
         } catch (error) {
             throw {error};
         }
     }
 
     async updateCiy({ cityId , data}){
-        const city = City.update(data, {
+        try {
+            const city = City.update(data, {
             where: {
                 id:cityId
             }
         })
-        
+        return city;
+        } catch (error) {
+            console.log("Something went wrong in the repository layer");
+            throw {error};
+        }
 
     }
 
