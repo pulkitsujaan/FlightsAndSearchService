@@ -1,4 +1,4 @@
-const { City } = require('../models/index');
+const { City, Airport } = require('../models/index');
 
 const { Op } = require('sequelize');
 
@@ -83,6 +83,25 @@ const { Op } = require('sequelize');
             }
             const cities = await City.findAll();
             return cities;
+        } catch (error) {
+            console.log("Something went wrong in the repository layer");
+            throw {error};
+        }
+    }
+    async getAirports(cityId){
+        try {
+            const airports = await City.findAll({
+            where:{
+                id:cityId
+            },
+            include:[
+            {
+                model:Airport,
+                as:'Airports'
+            }
+            ]
+        })
+        return airports;
         } catch (error) {
             console.log("Something went wrong in the repository layer");
             throw {error};

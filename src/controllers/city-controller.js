@@ -109,7 +109,22 @@ const getAll = async(req,res)=>{
 }
 
 const getAirports = async(req,res)=>{
-    
+    try {
+        const airports = await cityService.getAirports(req.params.id);
+        return res.status(200).json({
+            data:airports,
+            result:true,
+            message:"Succesfully fetched the airports"
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            success:false,
+            message: 'Not able to fetch the airports',
+            err: error
+        })
+    }
 }
 
 module.exports={
@@ -118,5 +133,6 @@ module.exports={
     get,
     update,
     getAll,
+    getAirports
     // createMultiple
 }
