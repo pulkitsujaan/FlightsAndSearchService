@@ -108,6 +108,10 @@ const getAll = async(req,res)=>{
     }
 }
 
+const getAirports = async(req,res)=>{
+    
+}
+
 module.exports={
     create,
     destroy,
