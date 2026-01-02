@@ -15,6 +15,17 @@ const { Op } = require('sequelize');
         }
     }
 
+    async createMultipleCities(citiesArr){
+        try {
+            const cities = City.bulkCreate(citiesArr);
+            return cities;
+
+        } catch (error) {
+            console.log("Something went wrong in the repository layer");
+            throw {error};
+        }
+    }
+
     async deleteCity(cityId){
         try {
             await City.destroy({ 

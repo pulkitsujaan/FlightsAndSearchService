@@ -8,6 +8,10 @@ class CityService{
 
     async createCity(data){
         try {
+            if(Array.isArray(data)){
+                const cities = await this.cityRepository.createMultipleCities(data);
+                return cities;
+            }
             const city = await this.cityRepository.createCity(data);
             return city;
             

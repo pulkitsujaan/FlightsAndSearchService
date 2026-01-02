@@ -1,4 +1,4 @@
-const { response } = require('express');
+// const express = require('express');
 const {CityService} = require('../services/index');
 
 const cityService = new CityService();
@@ -6,13 +6,13 @@ const cityService = new CityService();
 
 //POST-> /city/
 const create = async (req, res) =>{
-    try {
-        const city = await cityService.createCity(req.body);
-        return res.status(200).json({
-            data: city,
-            success: true,
-            message: 'Succesfully created a city',
-            err:{}
+    try { 
+            const cities = await cityService.createCity(req.body);
+            return res.status(200).json({
+                data: cities,
+                success: true,
+                message: (Array.isArray(req.body))?"Succesfully Created multiple cities":"Succesfully created a city",
+                err:{}
         })
     } catch (error) {
         console.log(error);
@@ -113,5 +113,6 @@ module.exports={
     destroy,
     get,
     update,
-    getAll
+    getAll,
+    // createMultiple
 }
